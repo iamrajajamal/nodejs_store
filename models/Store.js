@@ -35,7 +35,7 @@ const storeSchema = new mongoose.Schema({
     photo: String
 });
 
-storeSchema.pre('save', function(next){
+storeSchema.pre('save', async function(next){
     if(!this.isModified('name')){
         next(); //skip it
         return; //stop this function from running
@@ -51,5 +51,11 @@ storeSchema.pre('save', function(next){
     next();
     //TODO make more resilient so slugs are unique;
 });
+
+storeSchema.statics.getTagsList = function() {
+    return this.aggregate([
+        
+    ]);
+}
 
 module.exports = mongoose.model('Store', storeSchema);
