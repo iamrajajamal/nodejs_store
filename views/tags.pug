@@ -1,5 +1,7 @@
 extend layout
 
+include mixins/_storeCard
+
 block content
     .inner
         h2 #{tag || 'Tags'}
@@ -10,4 +12,6 @@ block content
                     === tag ? 'tag__link--active' : ''))
                         span.tag__text= t._id
                         span.tag__count= t.count
-        pre=h.dump(stores)
+        .stores
+            each store in stores
+                +storeCard(store)
